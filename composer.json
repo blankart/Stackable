@@ -1,4 +1,6 @@
 {
+    "name": "gambitph/Stackable",
+    "description": "Blocks for everyone",
     "require-dev": {
         "phpunit/phpunit": "^9"
     },
