@@ -1,6 +1,7 @@
 {
-    "name": "Stackable",
+    "name": "gambitph/stackable",
     "description": "Blocks for everyone",
+    "license": "GPL-3.0-or-later",
     "require-dev": {
         "phpunit/phpunit": "^9"
     },
