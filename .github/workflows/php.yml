@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Validate composer.json and composer.lock
       with:
         php-version: '7.4.1'
+
+    - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
     - name: Cache Composer packages
@@ -24,17 +24,12 @@ jobs:
       uses: actions/cache@v2
       with:
         path: vendor
-        php-version: '7.4.1'
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      with:
-        php-version: '7.4.1'
       run: composer install --prefer-dist --no-progress
       
     - name: Run test suite
-      with:
-        php-version: '7.4.1'
       run: composer run-script tests
