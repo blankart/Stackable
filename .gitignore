@@ -7,7 +7,6 @@ dist/**
 **/*__premium_only*
 coverage
 
-composer.phar
 composer.lock
 /vendor
 /wordpress

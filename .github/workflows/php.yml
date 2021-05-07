@@ -28,7 +28,8 @@ jobs:
           sleep 1
         done
 
-    - name: Setup PHP
+    # Run tests for PHP 7.4.1. We are doing this instead of splitting the files to avoid parallel execution of tests.
+    - name: Setup PHP v7.4.1
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4.1'
@@ -47,7 +48,28 @@ jobs:
         MYSQL_PASSWORD: root
         MYSQL_ROOT_PASSWORD: root
         MYSQL_PORT: 3306
+      run: composer run-script test
 
+    # Run tests for PHP 7.3.5. We are doing this instead of splitting the files to avoid parallel execution of tests.
+    - name: Setup PHP v7.4.1
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.3.5'
+
+    - name: Check PHP version
+      run: php -v
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Run test suite
+      env:
+        MYSQL_GITHUB_ACTION: true
+        MYSQL_DATABASE: stackable
+        MYSQL_USER: root
+        MYSQL_PASSWORD: root
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_PORT: 3306
       run: composer run-script test
 
 
