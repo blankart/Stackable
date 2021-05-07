@@ -55,10 +55,10 @@ jobs:
           sleep 1
         done
 
-    - name: Setup PHP v7.4.1
+    - name: Setup PHP v7.3.5
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.4.1'
+        php-version: '7.3.5'
 
     - name: Check PHP version
       run: php -v
