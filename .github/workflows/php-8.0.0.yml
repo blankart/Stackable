@@ -38,7 +38,7 @@ jobs:
       
     - name: Install dependencies
       run: |
-        composer require phpunit/phpunit:9.0.0 --dev --ignore-platform-reqs
+        composer require phpunit/phpunit:7.0.0 --dev --ignore-platform-reqs
         composer install --prefer-dist --no-progress --ignore-platform-reqs
 
     - name: Run test suite
