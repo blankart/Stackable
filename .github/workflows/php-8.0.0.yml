@@ -37,7 +37,8 @@ jobs:
       run: php -v
       
     - name: Install dependencies
-      run: |
+       run: |
+        composer require phpunit/phpunit:9.0.0 --dev
         composer install --prefer-dist --no-progress
 
     - name: Run test suite
