@@ -10,22 +10,15 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      MYSQL_GITHUB_ACTION: true
-      MYSQL_DATABASE: stackable
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_ROOT_PASSWORD: root
-
 
     services:
       mysql:
         image: mysql:8.0.23
         env:
-          MYSQL_DATABASE: ${{ MYSQL_DATABASE }}
-          MYSQL_USER: ${{ MYSQL_USER }}
-          MYSQL_PASSWORD: ${{ MYSQL_USER }}
-          MYSQL_ROOT_PASSWORD: ${{ MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: stackable
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: root
 
     steps:
     - uses: actions/checkout@v2
@@ -39,6 +32,13 @@ jobs:
       run: composer install --prefer-dist --no-progress
 
     - name: Run test suite
+      env:
+        MYSQL_GITHUB_ACTION: true
+        MYSQL_DATABASE: stackable
+        MYSQL_USER: root
+        MYSQL_PASSWORD: root
+        MYSQL_ROOT_PASSWORD: root
+
       run: composer run-script test
 
     - name: Check PHP version
