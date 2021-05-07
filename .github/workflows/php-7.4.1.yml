@@ -18,6 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Build Stackable Free
+      run: npm run build
+
     - name: Setup MySQL
       uses: mirromutth/mysql-action@v1.1
       with:
