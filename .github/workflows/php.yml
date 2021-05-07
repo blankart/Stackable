@@ -49,17 +49,6 @@ jobs:
         MYSQL_PORT: 3306
       run: composer run-script test
 
-    - name: Shutdown Ubuntu MySQL (SUDO)
-      run: sudo service mysql stop
-
-    - name: Setup MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        mysql database: 'stackable' # Optional, default value is "test". The specified database which will be create
-        mysql root password: 'root' # Required if "mysql user" is empty, default is empty. The root superuser password
-        mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-        mysql password: 'root' # Required if "mysql user" exists. The password for the "mysql user"
-
     - name: Wait for MySQL
       run: |
         while ! mysqladmin ping --host=127.0.0.1 --password=root --silent; do
