@@ -11,4 +11,9 @@ class PluginTest extends WP_UnitTestCase {
 		$this->assertTrue( function_exists( 'stackable_notice_gutenberg_plugin_activated' ) );
 		$this->assertTrue( function_exists( 'stackable_notice_gutenberg_plugin_ignore' ) );
 	}
+
+	/** @test **/
+	function test_sprintf_warning() {
+		$this->assertEquals( sprintf( '%s%s', 'test', 'test', ), 'testtest' );  
+	}
 }
