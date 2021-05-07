@@ -11,33 +11,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0.23
-        env:
-          MYSQL_DATABASE: stackable
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306
-
     steps:
     - uses: actions/checkout@v2
 
-    - name: Run MYSQL server
-      run: |
-        sudo systemctl enable mysql.service
-        sudo systemctl start mysql.service
-        sudo mysql -uroot -proot
-
-    - name: Verify MySQL connection
-      env:
-        PORT: ${{ job.services.mysql.ports['3306'] }}
-      run: mysqladmin ping -h "127.0.0.1" -P "$PORT"
-
-    - name: Create Stackable database
-      run: mysqladmin create stackable
+    - name: Setup MySQL
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql database: 'stackable' # Optional, default value is "test". The specified database which will be create
+        mysql root password: 'root' # Required if "mysql user" is empty, default is empty. The root superuser password
+        mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+        mysql password: 'root' # Required if "mysql user" exists. The password for the "mysql user"
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -54,7 +37,7 @@ jobs:
         MYSQL_USER: root
         MYSQL_PASSWORD: root
         MYSQL_ROOT_PASSWORD: root
-        MYSQL_PORT: ${{ job.services.mysql.ports['3306'] }}
+        MYSQL_PORT: 3306
 
       run: composer run-script test
 
