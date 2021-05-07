@@ -38,6 +38,7 @@ jobs:
         sudo systemctl enable mysql.service
         sudo systemctl start mysql.service
         sudo /etc/init.d/mysql start
+        sudo /etc/init.d/mysql -u root -proot -h 127.0.0.1 -e 'CREATE DATABASE stackable'
 
     - name: Run test suite
       env:
