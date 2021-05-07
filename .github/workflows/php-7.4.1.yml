@@ -33,6 +33,10 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
+    - name: Create test database
+      run: |
+        **sudo systemctl start mysql** mysql -uroot -proot < databases/tracker/create_databases.sql
+
     - name: Verify MySQL connection from host
       run: |
         sudo apt-get install -y mysql-client
