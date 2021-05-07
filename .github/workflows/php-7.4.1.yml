@@ -21,6 +21,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
     - uses: actions/checkout@v2
@@ -33,6 +34,11 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
+    - name: Verify MySQL connection from host
+      run: |
+        sudo apt-get install -y mysql-client
+        mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -proot -e "SHOW DATABASES"
+
     - name: Run test suite
       env:
         MYSQL_GITHUB_ACTION: true
@@ -40,7 +46,7 @@ jobs:
         MYSQL_USER: root
         MYSQL_PASSWORD: root
         MYSQL_ROOT_PASSWORD: root
-        MYSQL_PORT: 3306
+        MYSQL_PORT: ${{ job.services.mysql.ports['3306'] }}
 
       run: composer run-script test
 
