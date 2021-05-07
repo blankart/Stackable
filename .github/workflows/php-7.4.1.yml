@@ -35,6 +35,8 @@ jobs:
 
     - name: Run MYSQL server
       run: |
+        sudo systemctl enable mysql.service
+        sudo systemctl start mysql.service
         sudo /etc/init.d/mysql start
 
     - name: Run test suite
