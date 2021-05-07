@@ -25,6 +25,20 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Run MYSQL server
+      run: |
+        sudo systemctl enable mysql.service
+        sudo systemctl start mysql.service
+        sudo /etc/init.d/mysql start
+
+    - name: Verify MySQL connection
+      env:
+        PORT: ${{ job.services.mysql.ports['3306'] }}
+      run: mysqladmin ping -h "127.0.0.1" -P "$PORT"
+
+    - name: Create Stackable database
+      run: mysqladmin create stackable
+
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
@@ -32,15 +46,6 @@ jobs:
       
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
-
-    - name: Run MYSQL server
-      run: |
-        sudo systemctl enable mysql.service
-        sudo systemctl start mysql.service
-        sudo /etc/init.d/mysql start
-
-    - name: Create MYSQL Server
-      run: sudo /etc/init.d/mysql -u root -proot -h 127.0.0.1 -e 'CREATE DATABASE stackable'
 
     - name: Run test suite
       env:
