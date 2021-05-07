@@ -35,15 +35,10 @@ define( 'WP_DEBUG', true );
  * These tests will DROP ALL TABLES in the database with the prefix named below.
  * DO NOT use a production database or one that is shared with something else.
  */
-echo getenv( 'MYSQL_DATABASE' );
-echo getenv( 'MYSQL_USER' );
-echo getenv( 'MYSQL_PASSWORD' );
-echo getenv( 'MYSQL_GITHUB_ACTION' );
-
 define( 'DB_NAME'       , getenv( 'MYSQL_DATABASE' ) ? getenv( 'MYSQL_DATABASE' ) : 'stackable' );
 define( 'DB_USER'       , getenv( 'MYSQL_USER' ) ? getenv( 'MYSQL_USER' ) : 'root' );
 define( 'DB_PASSWORD'   , getenv( 'MYSQL_PASSWORD' ) ? getenv( 'MYSQL_PASSWORD' ) : '' );
-define( 'DB_HOST'       , getenv( 'MYSQL_GITHUB_ACTION' ) ? '127.0.0.1:' . getenv( 'MYSQL_PORT' ) : 'localhost:/tmp/mysql.sock' );
+define( 'DB_HOST'       , getenv( 'MYSQL_GITHUB_ACTION' ) ? 'localhost:' . getenv( 'MYSQL_PORT' ) : 'localhost:/tmp/mysql.sock' );
 define( 'DB_CHARSET'    , 'utf8' );
 define( 'DB_COLLATE'    , '' );
 
