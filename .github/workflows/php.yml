@@ -27,15 +27,16 @@ jobs:
         while ! mysqladmin ping --host=127.0.0.1 --password=root --silent; do
           sleep 1
         done
-
     - name: Setup PHP v7.4.1
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4.1'
-        tools: phpunit:6.5.14, wp-phpunit:5.7.0
 
     - name: Check PHP version
       run: php -v
+      
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
 
     - name: Run test suite
       env:
@@ -45,5 +46,4 @@ jobs:
         MYSQL_PASSWORD: root
         MYSQL_ROOT_PASSWORD: root
         MYSQL_PORT: 3306
-      run: phpunit test
-
+      run: composer run-script test
