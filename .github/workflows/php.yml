@@ -51,7 +51,7 @@ jobs:
       run: composer run-script test
 
     # Run tests for PHP 7.3.5. We are doing this instead of splitting the files to avoid parallel execution of tests.
-    - name: Setup PHP v7.4.1
+    - name: Setup PHP v7.3.5
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.3.5'
@@ -59,8 +59,19 @@ jobs:
     - name: Check PHP version
       run: php -v
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+    - name: Setup MySQL
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql database: 'stackable' # Optional, default value is "test". The specified database which will be create
+        mysql root password: 'root' # Required if "mysql user" is empty, default is empty. The root superuser password
+        mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+        mysql password: 'root' # Required if "mysql user" exists. The password for the "mysql user"
+
+    - name: Wait for MySQL
+      run: |
+        while ! mysqladmin ping --host=127.0.0.1 --password=root --silent; do
+          sleep 1
+        done
 
     - name: Run test suite
       env:
