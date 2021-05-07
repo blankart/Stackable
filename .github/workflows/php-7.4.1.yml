@@ -19,6 +19,8 @@ jobs:
           MYSQL_USER: root
           MYSQL_PASSWORD: root
           MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306
 
     steps:
     - uses: actions/checkout@v2
@@ -38,6 +40,7 @@ jobs:
         MYSQL_USER: root
         MYSQL_PASSWORD: root
         MYSQL_ROOT_PASSWORD: root
+        MYSQL_PORT: 3306
 
       run: composer run-script test
 
