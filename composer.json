@@ -2,12 +2,15 @@
     "name": "gambitph/stackable",
     "description": "Blocks for everyone",
     "license": "GPL-3.0-or-later",
+    "type": "wordpress-plugin",
     "require-dev": {
-        "phpunit/phpunit": "^5"
+        "phpunit/phpunit": "^6",
+        "wp-phpunit/wp-phpunit": "5.7",
+        "roots/wordpress": "5.7"
     },
     "scripts": {
-        "tests": [
-            "phpunit phpunit"
+        "test": [
+            "phpunit tests"
         ]
     }
 }

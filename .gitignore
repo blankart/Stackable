@@ -10,3 +10,4 @@ coverage
 composer.phar
 composer.lock
 /vendor
+/wordpress
