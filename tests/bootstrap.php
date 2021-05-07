@@ -13,10 +13,10 @@ require_once getenv( 'WP_PHPUNIT__DIR' ) . '/includes/functions.php';
 
 tests_add_filter( 'muplugins_loaded', function() {
     if ( getenv( 'MYSQL_GITHUB_ACTION' ) ) {
-        // Use the build plugin for github action.
-        require( dirname( __DIR__ ) . '/build/stackable/plugin.php' );
+        // Use the build folder to access Stackable.
+        require dirname( __DIR__ ) . '/build/stackable/plugin.php';
     } else {
-        // Otherwise, use the root plugin.php
+        // Otherwise, use the dev plugin.php file.
         require dirname( __DIR__ ) . '/plugin.php';
     }
 } );
