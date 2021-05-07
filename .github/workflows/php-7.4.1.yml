@@ -29,7 +29,7 @@ jobs:
       run: |
         sudo systemctl enable mysql.service
         sudo systemctl start mysql.service
-        sudo mysql start
+        sudo mysql -uroot -proot
 
     - name: Verify MySQL connection
       env:
