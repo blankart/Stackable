@@ -33,9 +33,9 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Create test database
+    - name: Run MYSQL server
       run: |
-        **sudo systemctl start mysql** mysql -uroot -proot < databases/tracker/create_databases.sql
+        sudo /etc/init.d/mysql start
 
     - name: Verify MySQL connection from host
       run: |
