@@ -1,7 +1,9 @@
 <?php
 class PluginTest extends WP_UnitTestCase {
 
-	/** @test **/
+	/**
+	 * Test core Stackable functions if exists.
+	 */
 	function test_wordpress_and_stackable_are_loaded() {
 		$this->assertTrue( function_exists( 'do_action' ) );
 		$this->assertTrue( function_exists( 'add_filter' ) );
@@ -10,10 +12,5 @@ class PluginTest extends WP_UnitTestCase {
 		$this->assertTrue( function_exists( 'stackable_version_upgrade_check' ) );
 		$this->assertTrue( function_exists( 'stackable_notice_gutenberg_plugin_activated' ) );
 		$this->assertTrue( function_exists( 'stackable_notice_gutenberg_plugin_ignore' ) );
-	}
-
-	/** @test **/
-	function test_sprintf_warning() {
-		$this->assertEquals( sprintf( '%s%s', 'test', 'test', ), 'testtest' );  
 	}
 }

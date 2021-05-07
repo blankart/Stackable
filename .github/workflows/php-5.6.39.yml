@@ -9,6 +9,7 @@ on:
 jobs:
   build:
 
+    # Use Ubuntu 20.04.
     runs-on: ubuntu-20.04
 
     steps:
@@ -23,16 +24,20 @@ jobs:
         mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
         mysql password: 'root' # Required if "mysql user" exists. The password for the "mysql user"
 
+    # Wait for MySQL server to initialize.
     - name: Wait for MySQL
       run: |
         while ! mysqladmin ping --host=127.0.0.1 --password=root --silent; do
           sleep 1
         done
+
+    # Change the PHP version to v5.6.39
     - name: Setup PHP v5.6.39
       uses: shivammathur/setup-php@v2
       with:
         php-version: '5.6.39'
 
+    # Check the current PHP version installed
     - name: Check PHP version
       run: php -v
       
@@ -41,6 +46,7 @@ jobs:
         composer require phpunit/phpunit:5.6.0 --dev
         composer install --prefer-dist --no-progress
 
+    # Run all tests.
     - name: Run test suite
       env:
         MYSQL_GITHUB_ACTION: true
