@@ -32,12 +32,10 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4.1'
+        tools: phpunit:6.5.14, wp-phpunit:5.7.0
 
     - name: Check PHP version
       run: php -v
-      
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
 
     - name: Run test suite
       env:
@@ -47,31 +45,5 @@ jobs:
         MYSQL_PASSWORD: root
         MYSQL_ROOT_PASSWORD: root
         MYSQL_PORT: 3306
-      run: composer run-script test
+      run: phpunit test
 
-    - name: Wait for MySQL
-      run: |
-        while ! mysqladmin ping --host=127.0.0.1 --password=root --silent; do
-          sleep 1
-        done
-
-    - name: Setup PHP v7.3.5
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.3.5'
-
-    - name: Check PHP version
-      run: php -v
-      
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
-
-    - name: Run test suite
-      env:
-        MYSQL_GITHUB_ACTION: true
-        MYSQL_DATABASE: stackable
-        MYSQL_USER: root
-        MYSQL_PASSWORD: root
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_PORT: 3306
-      run: composer run-script test
