@@ -6,15 +6,11 @@
     "require-dev": {
         "phpunit/phpunit": "^6",
         "wp-phpunit/wp-phpunit": "5.7",
-        "roots/wordpress": "5.7",
-        "spatie/phpunit-watcher": "^1.23"
+        "roots/wordpress": "5.7"
     },
     "scripts": {
         "test": [
             "phpunit tests"
-        ],
-        "test:watch": [
-            "phpunit-watcher watch"
         ]
     }
 }
