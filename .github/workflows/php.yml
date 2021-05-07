@@ -49,8 +49,8 @@ jobs:
         MYSQL_PORT: 3306
       run: composer run-script test
 
-      - name: Shutdown Ubuntu MySQL (SUDO)
-        run: sudo service mysql stop
+    - name: Shutdown Ubuntu MySQL (SUDO)
+      run: sudo service mysql stop
 
     - name: Setup MySQL
       uses: mirromutth/mysql-action@v1.1
