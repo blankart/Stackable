@@ -11,9 +11,6 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        php-versions: ['5.6.39', '7.3.5', '7.4.1', '8.0.0']
-
 
     steps:
     - uses: actions/checkout@v2
@@ -35,7 +32,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ matrix.php-versions }}
+        php-version: '7.4.1'
 
     - name: Check PHP version
       run: php -v
