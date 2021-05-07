@@ -1,4 +1,4 @@
-name: Unit Tests / PHP (v8.0.0)
+name: Unit Tests / PHP
 
 on:
   push:
@@ -10,6 +10,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest, windows-latest, macOS-latest]
+        php-versions: ['5.6.39', '7.3.5', '7.4.1', '8.0.0']
+
 
     steps:
     - uses: actions/checkout@v2
@@ -25,7 +30,16 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.0.0'
+        php-version: ${{ matrix.php-versions }}
+
+    - name: Check PHP version
+      run: php -v
+
+    - name: Cache Composer dependencies
+      uses: actions/cache@v2
+      with:
+        path: /tmp/composer-cache
+        key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
       
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
@@ -41,6 +55,4 @@ jobs:
 
       run: composer run-script test
 
-    - name: Check PHP version
-      run: php -v
 
