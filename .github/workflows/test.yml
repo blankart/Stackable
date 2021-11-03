@@ -1,0 +1,4 @@
+name: Test
+on:
+  repository_dispatch:
+    types: [start-example-workflow]
