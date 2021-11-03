@@ -5,10 +5,10 @@ on:
     types: [start-example-workflow]
 
 jobs:
-  build:
+  start-example-workflow:
     runs-on: ubuntu-20.04
 
     steps:
-    - name: Print Output
+    - name: Build Stackable Free Plugin
       run: |
-        echo ${{ github.event.client_payload.example_key }}
+        echo ${{ github.event.client_paayload.sample_key }}
