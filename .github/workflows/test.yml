@@ -2,3 +2,13 @@ name: Test
 on:
   repository_dispatch:
     types: [start-example-workflow]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Print Output
+      run: |
+        echo ${{ github.event.client_payload.example_key }}
